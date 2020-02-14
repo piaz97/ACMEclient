@@ -1,0 +1,14 @@
+#!/bin/bash
+DIRECTORY=$(dirname "$0")
+echo "Changing to ${DIRECTORY}"
+cd  "$DIRECTORY" || exit 1
+echo "$DIRECTORY"
+
+python3 challenge_http_server/challenge_http_server.py &
+sleep 1
+python3 shutdown_server/shutdown_server.py &
+sleep 1
+python3 owner.py $*
+
+echo "End"
+
